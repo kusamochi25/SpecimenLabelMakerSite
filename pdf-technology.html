@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="標本ラベルメーカーが作成するPDFの用紙寸法、ベクター描画、DPIと印刷解像度について解説します。">
+  <title>PDFと解像度 | 標本ラベルメーカー</title>
+  <link rel="icon" href="assets/app-icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">本文へ移動</a>
+  <div class="sheet"><div class="inner-frame">
+    <header class="masthead">
+      <img class="app-mark" src="assets/app-icon.png" alt="標本ラベルメーカーのアイコン" width="80" height="80">
+      <div><p class="eyebrow">BOOM INSECT · Digital Catalogue</p><p class="site-title">標本ラベルメーカー</p><p class="site-subtitle">A utility for entomological specimen labels</p></div>
+      <p class="catalogue-number">Doc. SLM-T01</p>
+    </header>
+    <nav class="site-nav" aria-label="主要ナビゲーション"><a href="index.html">総目録</a><a href="privacy.html">プライバシー</a><a href="support.html">サポート</a></nav>
+    <main id="main">
+      <header class="document-head"><h1>PDFと解像度</h1><p class="latin-note">Nota technica de mensura et resolutione</p><p class="date-line">掲載日 2026年6月20日</p></header>
+      <p class="lead">PDFには、紙の大きさと描画内容を記録します。本アプリが作成するPDF全体に「300 DPI」や「600 DPI」という一律の解像度が設定されているわけではありません。</p>
+
+      <section class="policy-section">
+        <p class="section-number">Tech. 01</p>
+        <div>
+          <h2>紙面はポイントで記録する</h2>
+          <p>本アプリはA4縦の210 × 297 mmを、PDFの座標単位であるポイントへ変換し、約595 × 842 ptのページとして作成します。1 ptは1/72 inchです。この値は画素数ではなく、紙面上の物理的な長さを表します。</p>
+          <p>ラベルの幅と高さもmmからポイントへ変換するため、印刷時に「実際のサイズ」または「100%」を選ぶことで、指定した寸法に近い大きさで出力できます。</p>
+        </div>
+      </section>
+
+      <section class="policy-section">
+        <p class="section-number">Tech. 02</p>
+        <div>
+          <h2>文字と罫線はベクターで保存する</h2>
+          <p>ラベルの文字、配置座標、文字サイズ、外枠の位置と太さは、ピクセル画像ではなく描画命令としてPDFへ保存します。そのため、表示や印刷の際に拡大しても、元画像の画素数を引き伸ばす場合のような粗さは原則として生じません。</p>
+          <p>現在のラベル本文には写真やスキャン画像を埋め込んでいません。将来画像を扱う場合は、その画像自体の画素数と紙面上の配置寸法から実効的なDPIが決まり、画質へ影響します。</p>
+        </div>
+      </section>
+
+      <section class="policy-section">
+        <p class="section-number">Tech. 03</p>
+        <div>
+          <h2>DPIが決まるタイミング</h2>
+          <ul>
+            <li><strong>画面表示:</strong> iPhoneやMacの画面密度と表示倍率に合わせて、PDF表示機能がその都度ピクセルへ変換します。</li>
+            <li><strong>印刷:</strong> プリンタまたは印刷ドライバが、300、600、1200 DPIなど機器側の解像度に合わせて描画します。</li>
+            <li><strong>画像への変換:</strong> PNGやJPEGへ書き出す時点で、指定したDPIまたは縦横の画素数に従って画像化されます。</li>
+          </ul>
+          <p>A4全体を画像化する場合の目安は、300 DPIで約2480 × 3508 px、600 DPIで約4961 × 7016 pxです。これはPDFそのものの固定解像度ではなく、画像化するときに選ばれる画素数です。</p>
+        </div>
+      </section>
+
+      <section class="policy-section">
+        <p class="section-number">Tech. 04</p>
+        <div>
+          <h2>印刷時の注意</h2>
+          <p>「用紙に合わせる」「ページを縮小」などが有効になっていると、PDF内の寸法が正しくてもラベル全体が拡大または縮小されます。寸法を重視する場合は、A4用紙を選択し、倍率を「実際のサイズ」または「100%」に設定して、最初に試し印刷を行ってください。</p>
+          <p>最終的な線の見え方や文字の濃さは、プリンタの解像度、印刷方式、用紙、インクまたはトナー、印刷アプリの設定によって変わります。</p>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer"><p>© 2026 BOOM INSECT / Masaki Takenaka</p><p><a href="index.html">公式情報目録</a></p></footer>
+  </div></div>
+</body>
+</html>
