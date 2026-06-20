@@ -128,18 +128,20 @@ a:hover {
 }
 
 .site-nav {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
   justify-content: center;
-  gap: 0;
   border-bottom: 1px solid var(--rule);
-  font-size: 0.83rem;
-  letter-spacing: 0.08em;
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
 }
 
 .site-nav a {
-  padding: 0.65rem 1rem;
+  padding: 0.65rem 0.35rem;
   color: var(--ink);
   text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
   border-inline-start: 1px solid rgba(76, 64, 45, 0.45);
 }
 
@@ -151,6 +153,16 @@ a:hover {
 .site-nav a:hover {
   color: var(--paper-light);
   background: var(--rule);
+}
+
+@media (max-width: 1000px) {
+  .site-nav {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .site-nav a {
+    border-bottom: 1px solid rgba(76, 64, 45, 0.28);
+  }
 }
 
 main {
@@ -403,11 +415,11 @@ main {
   }
 
   .site-nav {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     font-size: 0.76rem;
   }
 
   .site-nav a {
-    flex: 1;
     padding-inline: 0.35rem;
     text-align: center;
   }
