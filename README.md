@@ -13,6 +13,7 @@
 - `https://specimen-label-maker-site.pages.dev/usage`: 使用方法
 - `https://specimen-label-maker-site.pages.dev/pdf-technology`: PDFと解像度の技術ノート
 - `https://specimen-label-maker-site.pages.dev/`: サイト入口
+- `https://specimen-label-maker-site.pages.dev/app-ads.txt`: AdMob販売者情報
 
 ## ローカル確認
 
