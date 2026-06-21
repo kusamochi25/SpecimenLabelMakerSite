@@ -6,7 +6,7 @@
   <meta name="description" content="標本ラベルメーカーのプライバシーポリシー。情報の利用目的、保持期間、削除方針、削除依頼方法を記載しています。">
   <title>プライバシーポリシー | 標本ラベルメーカー</title>
   <link rel="icon" href="assets/app-icon.png">
-  <link rel="stylesheet" href="styles.css?v=20260620-3">
+  <link rel="stylesheet" href="styles.css?v=20260621-3">
 </head>
 <body>
   <a class="skip-link" href="#main">本文へ移動</a>
@@ -25,7 +25,7 @@
       <nav class="site-nav" aria-label="主要ナビゲーション">
         <a href="index.html">総目録</a>
         <a href="usage.html">使用方法</a>
-        <a href="pdf-technology.html">PDF技術</a>
+        <a href="pdf-technology.html">テクノロジー</a>
         <a href="api.html">API</a>
         <a href="support.html">サポート</a>
         <a href="updates.html">更新履歴</a>
@@ -38,7 +38,7 @@
         <header class="document-head">
           <h1>プライバシーポリシー</h1>
           <p class="latin-note">De tutela notitiarum privatarum</p>
-          <p class="date-line">制定日 2026年6月20日 · 最終改定日 2026年6月20日</p>
+          <p class="date-line">制定日 2026年6月20日 · 最終改定日 2026年6月21日</p>
         </header>
 
         <p class="lead">標本ラベルメーカー（以下「本アプリ」）は、ユーザーのプライバシーを尊重します。本ポリシーは、本アプリが取り扱う情報、その利用目的、保持期間および削除方法を説明するものです。</p>
@@ -65,7 +65,15 @@
           <div>
             <h2>無料保存API</h2>
             <p>無料ユーザーがPDFを保存する場合、無料保存枠の確認、不正利用防止、保存回数管理のため、開発者が管理するAPIへ通信します。</p>
-            <p>この通信では、DeviceCheckトークン、Keychainに保存されるインストール識別子、アプリのバージョン、各種リクエスト・広告・無料枠予約の識別子、無料保存枠の状態、保存処理の結果、通信日時を取り扱います。ラベル本文やPDFの内容はAPIへ送信しません。</p>
+            <p>APIは次の情報を取り扱います。</p>
+            <ul>
+              <li>DeviceCheckトークン</li>
+              <li>Keychainに保存したインストール識別子</li>
+              <li>アプリのバージョン</li>
+              <li>リクエスト、広告セッション、無料枠予約の各識別子</li>
+              <li>無料保存枠の状態、保存処理の結果、通信日時</li>
+            </ul>
+            <p>ラベル本文やPDFの内容は、開発者のAPIへ送信しません。</p>
           </div>
         </section>
 
@@ -73,7 +81,8 @@
           <p class="section-number">Art. 04</p>
           <div>
             <h2>DeviceCheck</h2>
-            <p>無料保存枠の不正取得や過度な利用を防止するため、AppleのDeviceCheckを使用します。DeviceCheckトークンは端末の正当性確認のためAppleに照会し、開発者のデータベースには保存しません。</p>
+            <p>無料保存枠の不正取得を減らすため、AppleのDeviceCheckを使用します。アプリが取得した一時的なトークンは、開発者のAPIを経由してAppleの検証用エンドポイントへ送信します。</p>
+            <p>DeviceCheckによる検証は、不正利用を判断するための一つの信号です。端末やアプリが改変されていないことを、DeviceCheckだけで完全に証明するものではありません。開発者のデータベースには、DeviceCheckトークン自体を保存しません。</p>
           </div>
         </section>
 
@@ -187,7 +196,12 @@
           <p class="section-number">Art. 13</p>
           <div>
             <h2>外部サービスへの送信と第三者提供</h2>
-            <p>本アプリは、機能提供に必要な範囲で、AppleにDeviceCheckトークンと課金状態確認に必要な情報を、Googleに広告配信に必要な端末情報、広告表示・視聴情報、広告セッション識別子を、CloudflareにAPI通信とアクセス制御に必要な情報を送信または処理委託します。</p>
+            <p>本アプリは、機能提供に必要な範囲で、次の外部サービスへ情報を送信します。</p>
+            <ul>
+              <li><strong>Apple:</strong> DeviceCheckトークンと、課金状態の確認に必要な情報</li>
+              <li><strong>Google:</strong> 広告配信に必要な端末情報、広告の表示・視聴情報、広告セッション識別子</li>
+              <li><strong>Cloudflare:</strong> API通信とアクセス制御に必要な情報</li>
+            </ul>
             <p>各事業者は、各社の利用規約、プライバシーポリシーおよび適用法令に基づいて情報を取り扱います。開発者はユーザー情報を販売しません。その他、法令に基づく場合または人の生命、身体、財産の保護に必要で本人の同意を得ることが困難な場合を除き、必要な範囲を超えて第三者に提供しません。</p>
           </div>
         </section>

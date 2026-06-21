@@ -4,20 +4,20 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="標本ラベルメーカーの無料保存API利用説明。送信する情報、送信しない情報、DeviceCheckについて説明します。">
   <title>API利用説明 | 標本ラベルメーカー</title>
-  <link rel="icon" href="assets/app-icon.png"><link rel="stylesheet" href="styles.css?v=20260620-3">
+  <link rel="icon" href="assets/app-icon.png"><link rel="stylesheet" href="styles.css?v=20260621-3">
 </head>
 <body>
   <a class="skip-link" href="#main">本文へ移動</a>
   <div class="sheet"><div class="inner-frame">
     <header class="masthead"><img class="app-mark" src="assets/app-icon.png" alt="標本ラベルメーカーのアイコン" width="80" height="80"><div><p class="eyebrow">BOOM INSECT · Digital Catalogue</p><p class="site-title">標本ラベルメーカー</p><p class="site-subtitle">A utility for entomological specimen labels</p></div><p class="catalogue-number">Doc. SLM-A01</p></header>
-    <nav class="site-nav" aria-label="主要ナビゲーション"><a href="index.html">総目録</a><a href="usage.html">使用方法</a><a href="pdf-technology.html">PDF技術</a><a href="api.html" aria-current="page">API</a><a href="support.html">サポート</a><a href="updates.html">更新履歴</a><a href="privacy.html">プライバシー</a><a href="terms.html">利用規約</a><a href="commerce.html">特商法</a></nav>
+    <nav class="site-nav" aria-label="主要ナビゲーション"><a href="index.html">総目録</a><a href="usage.html">使用方法</a><a href="pdf-technology.html">テクノロジー</a><a href="api.html" aria-current="page">API</a><a href="support.html">サポート</a><a href="updates.html">更新履歴</a><a href="privacy.html">プライバシー</a><a href="terms.html">利用規約</a><a href="commerce.html">特商法</a></nav>
     <main id="main">
       <header class="document-head"><h1>API利用説明</h1><p class="latin-note">Explicatio communicationis API</p><p class="date-line">掲載日 2026年6月20日</p></header>
       <p class="lead">本アプリでは、無料ユーザーのPDF保存時に、無料保存枠の確認および不正利用防止のため、開発者が管理するAPIへ通信します。</p>
-      <section class="policy-section"><p class="section-number">API 01</p><div><h2>APIを利用する目的</h2><p>API通信では、無料保存枠の確認、無料保存枠の消費、PDF保存失敗時の無料枠復元、通信状態の確認を行います。</p></div></section>
-      <section class="policy-section"><p class="section-number">API 02</p><div><h2>送信しない情報</h2><p>無料保存枠の確認APIでは、PDFの内容やラベル本文は送信されません。学名、採集地、採集者名、同定者名、所有者名、備考など、ユーザーが入力したラベル内容はAPI側で確認しません。開発者はユーザーが作成したPDFの内容を確認、閲覧しません。</p></div></section>
-      <section class="policy-section"><p class="section-number">API 03</p><div><h2>APIへ送信する情報</h2><p>無料保存機能の利用時に、DeviceCheckトークン、アプリがKeychainに保存するインストール識別子、アプリのバージョン、リクエスト識別子、広告セッション識別子、無料枠予約識別子を開発者のAPIへ送信します。インストール識別子は、サーバー上で秘密値を用いて一方向変換した識別子として管理します。</p></div></section>
-      <section class="policy-section"><p class="section-number">API 04</p><div><h2>DeviceCheckによる端末確認</h2><p>無料保存枠の不正取得や過度な利用を防止するため、AppleのDeviceCheckを使用します。アプリが取得したDeviceCheckトークンは開発者のAPIを経由してAppleに照会し、正規のApple端末上のアプリからの通信であることを確認します。開発者のデータベースにDeviceCheckトークンそのものは保存しません。</p></div></section>
+      <section class="policy-section"><p class="section-number">API 01</p><div><h2>APIを利用する目的</h2><p>APIは、無料保存に必要な次の処理を行います。</p><ul><li>通信状態と無料保存枠を確認します。</li><li>保存に使う無料枠を予約し、完了時に消費します。</li><li>PDF保存に失敗した場合、予約した無料枠の復元を試みます。</li><li>過度なリクエストや不正利用を検知します。</li></ul></div></section>
+      <section class="policy-section"><p class="section-number">API 02</p><div><h2>送信しない情報</h2><p>次の情報は、開発者のAPIへ送信しません。</p><ul><li>作成したPDFとその本文</li><li>学名、採集地、採集者名、同定者名、所有者名</li><li>採集方法、備考など、ラベルへ入力した内容</li></ul><p>開発者はAPIを通じて、ラベルやPDFの内容を閲覧できません。</p></div></section>
+      <section class="policy-section"><p class="section-number">API 03</p><div><h2>APIへ送信する情報</h2><p>無料保存機能は、次の情報を開発者のAPIへ送信します。</p><ul><li>DeviceCheckトークン</li><li>Keychainに保存したインストール識別子</li><li>アプリのバージョン</li><li>リクエスト、広告セッション、無料枠予約の各識別子</li></ul><p>APIはインストール識別子を秘密値で一方向変換し、変換後の識別子をデータベースへ保存します。</p></div></section>
+      <section class="policy-section"><p class="section-number">API 04</p><div><h2>DeviceCheckによるトークン検証</h2><p>無料保存枠の不正取得を減らすため、AppleのDeviceCheckを利用します。アプリはAppleが発行する一時的なDeviceCheckトークンを取得し、開発者のAPIへ送信します。APIはそのトークンをAppleの検証用エンドポイントへ送ります。</p><p>検証成功は、不正利用を判断するための一つの信号です。端末やアプリが改変されていないことを、DeviceCheckだけで完全に証明するものではありません。APIはDeviceCheckトークン自体をデータベースへ保存しません。</p><p class="source-note">Reference: <a href="https://developer.apple.com/documentation/devicecheck/accessing-and-modifying-per-device-data" rel="noopener noreferrer">Apple DeviceCheck</a></p></div></section>
       <section class="policy-section"><p class="section-number">API 05</p><div><h2>利用できない場合</h2><p>無料ユーザーは、通信できない場合、無料保存枠を確認できない場合、またはサーバが混雑、停止している場合、PDF保存を実行できません。サーバ障害時は「無料保存の確認ができませんでした。時間をおいて再度お試しください。」と表示されます。</p></div></section>
       <section class="policy-section"><p class="section-number">API 06</p><div><h2>プレミアムユーザー</h2><p>プレミアムユーザーは、広告視聴や無料保存枠の消費を行わずにPDFを保存できます。プレミアム状態の確認にはAppleのStoreKitを利用します。</p></div></section>
     </main>

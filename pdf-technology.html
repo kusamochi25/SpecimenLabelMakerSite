@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="標本ラベルメーカーが作成するPDFの用紙寸法、ベクター描画、DPIと印刷解像度について解説します。">
-  <title>PDFと解像度 | 標本ラベルメーカー</title>
+  <meta name="description" content="PDFの仕組み、画像や解像度との違い、コピー機との情報連携、標本ラベルメーカーのセル配置技術を解説します。">
+  <title>テクノロジー | 標本ラベルメーカー</title>
   <link rel="icon" href="assets/app-icon.png">
-  <link rel="stylesheet" href="styles.css?v=20260620-3">
+  <link rel="stylesheet" href="styles.css?v=20260621-3">
+  <script src="technology.js?v=20260621-1" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">本文へ移動</a>
@@ -16,50 +17,135 @@
       <div><p class="eyebrow">BOOM INSECT · Digital Catalogue</p><p class="site-title">標本ラベルメーカー</p><p class="site-subtitle">A utility for entomological specimen labels</p></div>
       <p class="catalogue-number">Doc. SLM-T01</p>
     </header>
-    <nav class="site-nav" aria-label="主要ナビゲーション"><a href="index.html">総目録</a><a href="usage.html">使用方法</a><a href="pdf-technology.html" aria-current="page">PDF技術</a><a href="api.html">API</a><a href="support.html">サポート</a><a href="updates.html">更新履歴</a><a href="privacy.html">プライバシー</a><a href="terms.html">利用規約</a><a href="commerce.html">特商法</a></nav>
+    <nav class="site-nav" aria-label="主要ナビゲーション"><a href="index.html">総目録</a><a href="usage.html">使用方法</a><a href="pdf-technology.html" aria-current="page">テクノロジー</a><a href="api.html">API</a><a href="support.html">サポート</a><a href="updates.html">更新履歴</a><a href="privacy.html">プライバシー</a><a href="terms.html">利用規約</a><a href="commerce.html">特商法</a></nav>
     <main id="main">
-      <header class="document-head"><h1>PDFと解像度</h1><p class="latin-note">Nota technica de mensura et resolutione</p><p class="date-line">掲載日 2026年6月20日</p></header>
-      <p class="lead">PDFには、紙の大きさと描画内容を記録します。本アプリが作成するPDF全体に「300 DPI」や「600 DPI」という一律の解像度が設定されているわけではありません。</p>
+      <header class="document-head"><h1>テクノロジー</h1><p class="latin-note">Commentarii de arte digitali</p><p class="date-line">掲載日 2026年6月21日</p></header>
+      <p class="lead">小さな標本ラベルを、画面の中の文字から寸法を持つ紙面へ変えるまで。本アプリを支えるPDF、印刷、配置の仕組みを、五つの短い読み物に分けて紹介します。</p>
+      <p class="verification-note"><strong>検証方針:</strong> PDFと印刷の一般仕様は、AdobeとAppleの公式資料で確認しています。本アプリ固有の数値と動作は、2026年6月21日時点のソースコードで確認しています。プリンタや共有先によって変わる処理は、共通仕様と区別して記載します。</p>
 
-      <section class="policy-section">
-        <p class="section-number">Tech. 01</p>
-        <div>
-          <h2>紙面はポイントで記録する</h2>
-          <p>本アプリはA4縦の210 × 297 mmを、PDFの座標単位であるポイントへ変換し、約595 × 842 ptのページとして作成します。1 ptは1/72 inchです。この値は画素数ではなく、紙面上の物理的な長さを表します。</p>
-          <p>ラベルの幅と高さもmmからポイントへ変換するため、印刷時に「実際のサイズ」または「100%」を選ぶことで、指定した寸法に近い大きさで出力できます。</p>
+      <section class="usage-branch" aria-labelledby="technology-topic-title">
+        <p class="section-number">Select a topic</p>
+        <h2 id="technology-topic-title">読みたい項目を選択</h2>
+        <p>各項目を選ぶと、その読み物だけを表示します。URLに選択項目が残るため、特定の記事を直接共有できます。</p>
+        <div class="usage-tabs technology-tabs" role="tablist" aria-label="技術記事">
+          <button id="pdf-tab" class="usage-tab technology-tab" type="button" role="tab" aria-selected="true" aria-controls="pdf-article" data-topic="pdf">PDFについて</button>
+          <button id="image-tab" class="usage-tab technology-tab" type="button" role="tab" aria-selected="false" aria-controls="image-article" data-topic="image" tabindex="-1">PDFと画像の違い</button>
+          <button id="resolution-tab" class="usage-tab technology-tab" type="button" role="tab" aria-selected="false" aria-controls="resolution-article" data-topic="resolution" tabindex="-1">PDFと解像度</button>
+          <button id="printer-tab" class="usage-tab technology-tab" type="button" role="tab" aria-selected="false" aria-controls="printer-article" data-topic="printer" tabindex="-1">コピー機との情報連携</button>
+          <button id="layout-tab" class="usage-tab technology-tab" type="button" role="tab" aria-selected="false" aria-controls="layout-article" data-topic="layout" tabindex="-1">本アプリのセル配置技術</button>
         </div>
       </section>
 
-      <section class="policy-section">
-        <p class="section-number">Tech. 02</p>
-        <div>
-          <h2>文字と罫線はベクターで保存する</h2>
-          <p>ラベルの文字、配置座標、文字サイズ、外枠の位置と太さは、ピクセル画像ではなく描画命令としてPDFへ保存します。そのため、表示や印刷の際に拡大しても、元画像の画素数を引き伸ばす場合のような粗さは原則として生じません。</p>
-          <p>現在のラベル本文には写真やスキャン画像を埋め込んでいません。将来画像を扱う場合は、その画像自体の画素数と紙面上の配置寸法から実効的なDPIが決まり、画質へ影響します。</p>
-        </div>
-      </section>
+      <article id="pdf-article" class="usage-panel technology-article" role="tabpanel" aria-labelledby="pdf-tab" data-topic-panel="pdf">
+        <section class="policy-section">
+          <p class="section-number">PDF 01</p>
+          <div>
+            <h2>PDFは「紙面の設計図」</h2>
+            <p>PDFは、ページの見た目を環境をまたいで受け渡すための文書形式です。ページの大きさ、文字、線、図形などを一つのファイルへ記録できます。</p>
+            <p>本アプリはA4縦の1ページを作り、指定寸法のラベルを配置します。画面を撮影して貼り付けるのではなく、PDFの描画領域へ文字と枠線を直接描きます。</p>
+            <p class="source-note">Reference: <a href="https://opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/pdfreference1.6.pdf" rel="noopener noreferrer">Adobe PDF Reference</a>、<a href="https://developer.apple.com/documentation/uikit/uigraphicspdfrenderer" rel="noopener noreferrer">Apple UIGraphicsPDFRenderer</a></p>
+          </div>
+        </section>
+        <section class="policy-section">
+          <p class="section-number">PDF 02</p>
+          <div>
+            <h2>端末を離れても寸法を伝えられる</h2>
+            <p>本アプリはページとラベルの寸法をポイントへ変換します。ポイントはPDFの座標単位です。初期状態では72ポイントが1インチに相当します。</p>
+            <p>PDFはA4のページ寸法と、ページ内の配置関係を保持します。ただし、印刷側が拡大や縮小を行うと、紙に出る寸法は変わります。</p>
+            <p class="source-note">Reference: <a href="https://opensource.adobe.com/dc-acrobat-sdk-docs/library/interapp/IAC_API_CoordinateSystems.html" rel="noopener noreferrer">Adobe Coordinate Systems</a></p>
+          </div>
+        </section>
+      </article>
 
-      <section class="policy-section">
-        <p class="section-number">Tech. 03</p>
-        <div>
-          <h2>DPIが決まるタイミング</h2>
-          <ul>
-            <li><strong>画面表示:</strong> iPhoneやMacの画面密度と表示倍率に合わせて、PDF表示機能がその都度ピクセルへ変換します。</li>
-            <li><strong>印刷:</strong> プリンタまたは印刷ドライバが、300、600、1200 DPIなど機器側の解像度に合わせて描画します。</li>
-            <li><strong>画像への変換:</strong> PNGやJPEGへ書き出す時点で、指定したDPIまたは縦横の画素数に従って画像化されます。</li>
-          </ul>
-          <p>A4全体を画像化する場合の目安は、300 DPIで約2480 × 3508 px、600 DPIで約4961 × 7016 pxです。これはPDFそのものの固定解像度ではなく、画像化するときに選ばれる画素数です。</p>
-        </div>
-      </section>
+      <article id="image-article" class="usage-panel technology-article" role="tabpanel" aria-labelledby="image-tab" data-topic-panel="image">
+        <section class="policy-section">
+          <p class="section-number">Image 01</p>
+          <div>
+            <h2>画像は画素、PDFは描画命令</h2>
+            <p>PNGやJPEGなどの画像は、画素の集まりです。大きく引き伸ばすと、輪郭が粗く見えることがあります。</p>
+            <p>本アプリは、ラベル全体を一枚の画像に変換してPDFへ貼り付けてはいません。文字と枠線をPDFの描画領域へ直接描くため、画面写真を拡大する場合とは性質が異なります。</p>
+          </div>
+        </section>
+        <section class="policy-section">
+          <p class="section-number">Image 02</p>
+          <div>
+            <h2>どちらが優れているかではなく、役割が違う</h2>
+            <p>画像とPDFは用途が異なります。写真には画像形式が適しています。寸法を持つ紙面や文字、細い線にはPDFが適しています。</p>
+            <p>PDFの中に画像を置くこともできます。その場合、画像部分の精細さは元の画素数と配置寸法に左右されます。現在の本アプリは、ラベル本文へ写真やスキャン画像を埋め込んでいません。</p>
+          </div>
+        </section>
+      </article>
 
-      <section class="policy-section">
-        <p class="section-number">Tech. 04</p>
-        <div>
-          <h2>印刷時の注意</h2>
-          <p>「用紙に合わせる」「ページを縮小」などが有効になっていると、PDF内の寸法が正しくてもラベル全体が拡大または縮小されます。寸法を重視する場合は、A4用紙を選択し、倍率を「実際のサイズ」または「100%」に設定して、最初に試し印刷を行ってください。</p>
-          <p>最終的な線の見え方や文字の濃さは、プリンタの解像度、印刷方式、用紙、インクまたはトナー、印刷アプリの設定によって変わります。</p>
-        </div>
-      </section>
+      <article id="resolution-article" class="usage-panel technology-article" role="tabpanel" aria-labelledby="resolution-tab" data-topic-panel="resolution">
+        <section class="policy-section">
+          <p class="section-number">Resolution 01</p>
+          <div>
+            <h2>PDFそのものに一律のDPIはない</h2>
+            <p>本アプリはA4縦の210 × 297 mmをポイントへ変換します。作成するページは約595 × 842 ptです。ラベルの幅と高さも、mmからポイントへ変換します。</p>
+            <p>ページ全体を一枚の画像として保存していないため、PDF全体に一律の「300 DPI」や「600 DPI」を設定していません。</p>
+            <p class="source-note">Reference: <a href="https://opensource.adobe.com/dc-acrobat-sdk-docs/library/interapp/IAC_API_CoordinateSystems.html" rel="noopener noreferrer">Adobe Coordinate Systems</a>、アプリ内のA4・mm変換定数</p>
+          </div>
+        </section>
+        <section class="policy-section">
+          <p class="section-number">Resolution 02</p>
+          <div>
+            <h2>DPIは出力時に具体化する</h2>
+            <ul>
+              <li><strong>画面表示:</strong> PDF表示機能が、画面密度と表示倍率に応じて画面用の画素へ変換します。</li>
+              <li><strong>印刷:</strong> 印刷システムとプリンタが、機器と設定に応じて印刷用の点へ変換します。</li>
+              <li><strong>画像への変換:</strong> PNGやJPEGへ書き出す時点で、指定したDPIまたは縦横の画素数に従って画像化されます。</li>
+            </ul>
+            <p>A4全体を画像化する目安は、300 DPIで約2480 × 3508 pxです。600 DPIでは約4961 × 7016 pxです。これらは画像化するときの画素数であり、PDFに固定された画素数ではありません。</p>
+          </div>
+        </section>
+      </article>
+
+      <article id="printer-article" class="usage-panel technology-article" role="tabpanel" aria-labelledby="printer-tab" data-topic-panel="printer">
+        <section class="policy-section">
+          <p class="section-number">Print 01</p>
+          <div>
+            <h2>アプリから紙までの情報の流れ</h2>
+            <p>本アプリは、共有メニューへPDFファイルを渡します。そこからAirPrintを選ぶ場合は、iOSの印刷機能が印刷ジョブを管理します。他の印刷アプリへ渡すこともできます。</p>
+            <p>PDFのページは、印刷の途中で機器が出力できる点の集まりへ変換されます。この処理をどこで、どの設定で行うかは、印刷アプリ、通信方式、プリンタやコピー機によって異なります。本アプリは印字装置を直接制御しません。</p>
+            <p class="source-note">Reference: <a href="https://developer.apple.com/airprint/" rel="noopener noreferrer">Apple AirPrint</a>、<a href="https://developer.apple.com/documentation/uikit/uiprintinteractioncontroller" rel="noopener noreferrer">Apple UIPrintInteractionController</a></p>
+          </div>
+        </section>
+        <section class="policy-section">
+          <p class="section-number">Print 02</p>
+          <div>
+            <h2>PDFが伝える情報、伝えない情報</h2>
+            <p>PDFはA4のページ寸法、ラベルの位置、文字、枠線を保持します。用紙トレイ、両面印刷、濃度、機器固有の補正は、印刷画面または機器側で決まります。コピー機が、学名や採集地を個別の項目として受け取るわけではありません。</p>
+            <p>寸法を優先する場合はA4を選び、拡大縮小を行わない設定を選んでください。設定名は印刷アプリや機器によって異なります。「実際のサイズ」または「100%」と表示される場合があります。試し印刷後にラベルを実測してください。</p>
+          </div>
+        </section>
+      </article>
+
+      <article id="layout-article" class="usage-panel technology-article" role="tabpanel" aria-labelledby="layout-tab" data-topic-panel="layout">
+        <section class="policy-section">
+          <p class="section-number">Layout 01</p>
+          <div>
+            <h2>mmをポイントへ変換して並べる</h2>
+            <p>本アプリでは1 mmを2.8346 ptとして扱い、A4の210 × 297 mmをPDF座標へ変換します。紙面の四辺には10 mmの余白を設け、その内側をセルの配置領域とします。各セルの幅と高さも、入力されたmmからポイントへ変換されます。</p>
+            <p>配置は入力順に左から右へ進みます。右端の余白を越えるセルは次の行の左端へ送り、行の高さには、その行で最も背の高いセルを使います。異なる高さのラベルが混在しても、次の行と重ならないための仕組みです。</p>
+          </div>
+        </section>
+        <section class="policy-section">
+          <p class="section-number">Layout 02</p>
+          <div>
+            <h2>種類ごとのまとまりと1ページの上限</h2>
+            <p>データラベル、同定ラベルなどラベルの種類が変わる箇所では、新しい行へ移り、まとまりの間へ4 mmの間隔を設けます。同じ種類のセル同士には追加のすき間を設けず、枠線を隣接させて配置します。</p>
+            <p>下端の10 mm余白を越えるセルに到達すると、そこで配置を終了します。本アプリは一つのPDFへA4の1ページだけを作るため、自動的に2ページ目を追加しません。収まらない場合は、プレビューで枚数や寸法を調整します。</p>
+          </div>
+        </section>
+        <section class="policy-section">
+          <p class="section-number">Layout 03</p>
+          <div>
+            <h2>プレビューと保存PDFを同じ計算へ寄せる</h2>
+            <p>A4プレビューは、保存時と同じPDF描画処理とセル配置計算から文書を作り、PDF表示機能で画面へ表示します。セルをタップした位置の判定にも同じ配置結果を使います。画面上の配置、タップ対象、保存PDFの座標が別々の計算でずれないようにするためです。</p>
+            <p>各セルでは指定位置に枠線を描き、内側へわずかな余白を取って文字を配置します。ただし、文字量がセル寸法を超えれば切れる可能性があります。配置計算が収まりを保証するのはセルの外形であり、本文の可読性はプレビューと警告を見て調整する必要があります。</p>
+          </div>
+        </section>
+      </article>
     </main>
     <footer class="site-footer"><p>© 2026 BOOM INSECT / Masaki Takenaka</p><p><a href="index.html">公式情報目録</a></p></footer>
   </div></div>

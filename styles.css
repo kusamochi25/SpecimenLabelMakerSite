@@ -221,7 +221,93 @@ main {
   max-width: 42rem;
   margin: 0 auto 2.5rem;
   font-size: 1.04rem;
-  text-align: justify;
+  text-align: left;
+}
+
+.usage-branch {
+  margin-bottom: 1.2rem;
+  padding: 1.25rem;
+  border: 3px double var(--rule);
+  background: rgba(250, 246, 236, 0.42);
+}
+
+.usage-branch h2,
+.usage-branch p {
+  margin: 0;
+}
+
+.usage-branch h2 {
+  font-size: 1.2rem;
+  letter-spacing: 0.09em;
+}
+
+.usage-branch h2 + p {
+  margin-top: 0.35rem;
+}
+
+.usage-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 1rem;
+  border: 1px solid var(--rule);
+}
+
+.usage-tab {
+  min-height: 3.2rem;
+  padding: 0.7rem 1rem;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  font: 600 1rem/1.4 "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", serif;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+}
+
+.usage-tab + .usage-tab {
+  border-inline-start: 1px solid var(--rule);
+}
+
+.usage-tab[aria-selected="true"] {
+  color: var(--paper-light);
+  background: var(--rule);
+}
+
+.usage-tab:hover:not([aria-selected="true"]) {
+  background: rgba(76, 64, 45, 0.08);
+}
+
+.usage-tab:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 3px double var(--accent);
+  outline-offset: -5px;
+}
+
+.technology-tabs {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.technology-tab {
+  min-height: 4.5rem;
+  padding-inline: 0.45rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+}
+
+.technology-article {
+  margin-bottom: 0;
+}
+
+.usage-panel {
+  margin-bottom: 1.5rem;
+  padding-inline: 1rem;
+  border-inline: 1px solid rgba(76, 64, 45, 0.45);
+  border-bottom: 1px solid rgba(76, 64, 45, 0.45);
+}
+
+.usage-panel[hidden] {
+  display: none;
 }
 
 .policy-section {
@@ -248,7 +334,7 @@ main {
 .policy-section p,
 .policy-section ul {
   margin: 0;
-  text-align: justify;
+  text-align: left;
 }
 
 .policy-section p + p,
@@ -259,6 +345,25 @@ main {
 
 .policy-section ul {
   padding-left: 1.4rem;
+}
+
+.verification-note,
+.source-note {
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.verification-note {
+  margin: 0 0 1.5rem;
+  padding: 0.85rem 1rem;
+  border-inline-start: 3px double var(--rule);
+  background: rgba(76, 64, 45, 0.05);
+}
+
+.source-note {
+  margin-top: 0.9rem !important;
+  padding-top: 0.65rem;
+  border-top: 1px dotted rgba(76, 64, 45, 0.5);
 }
 
 .retention-table {
@@ -430,6 +535,36 @@ main {
 
   .policy-section {
     display: block;
+  }
+
+  .usage-branch {
+    padding: 1rem;
+  }
+
+  .usage-panel {
+    padding-inline: 0.75rem;
+  }
+
+  .technology-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .technology-tab {
+    min-height: 3.8rem;
+    border-bottom: 1px solid rgba(76, 64, 45, 0.45);
+  }
+
+  .technology-tab + .technology-tab {
+    border-inline-start: 0;
+  }
+
+  .technology-tab:nth-child(even) {
+    border-inline-start: 1px solid var(--rule);
+  }
+
+  .technology-tab:last-child {
+    grid-column: 1 / -1;
+    border-bottom: 0;
   }
 
   .section-number {

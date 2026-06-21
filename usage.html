@@ -6,7 +6,8 @@
   <meta name="description" content="標本ラベルメーカーの使用方法。ラベル作成、無料保存、プレミアム、下書き保存枠追加、購入の復元について説明します。">
   <title>使用方法 | 標本ラベルメーカー</title>
   <link rel="icon" href="assets/app-icon.png">
-  <link rel="stylesheet" href="styles.css?v=20260620-3">
+  <link rel="stylesheet" href="styles.css?v=20260621-3">
+  <script src="usage.js?v=20260621-1" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">本文へ移動</a>
@@ -16,42 +17,125 @@
       <div><p class="eyebrow">BOOM INSECT · Digital Catalogue</p><p class="site-title">標本ラベルメーカー</p><p class="site-subtitle">A utility for entomological specimen labels</p></div>
       <p class="catalogue-number">Doc. SLM-G01</p>
     </header>
-    <nav class="site-nav" aria-label="主要ナビゲーション"><a href="index.html">総目録</a><a href="usage.html" aria-current="page">使用方法</a><a href="pdf-technology.html">PDF技術</a><a href="api.html">API</a><a href="support.html">サポート</a><a href="updates.html">更新履歴</a><a href="privacy.html">プライバシー</a><a href="terms.html">利用規約</a><a href="commerce.html">特商法</a></nav>
+    <nav class="site-nav" aria-label="主要ナビゲーション"><a href="index.html">総目録</a><a href="usage.html" aria-current="page">使用方法</a><a href="pdf-technology.html">テクノロジー</a><a href="api.html">API</a><a href="support.html">サポート</a><a href="updates.html">更新履歴</a><a href="privacy.html">プライバシー</a><a href="terms.html">利用規約</a><a href="commerce.html">特商法</a></nav>
     <main id="main">
       <header class="document-head"><h1>使用方法</h1><p class="latin-note">Modus operandi</p><p class="date-line">掲載日 2026年6月20日</p></header>
       <p class="lead">ラベルを作成する操作は共通ですが、PDF保存と下書き件数は購入状態によって経路が異なります。最初に自分の状態を確認し、該当する分岐を参照してください。</p>
 
-      <section class="policy-section">
-        <p class="section-number">Guide 01</p>
-        <div>
-          <h2>最初に確認する4つの経路</h2>
-          <ul>
-            <li><strong>購入なし:</strong> PDFは月2回まで無料保存できます。保存時に通信と広告視聴が必要です。下書きは1件です。</li>
-            <li><strong>月額または年額プレミアム:</strong> PDFを回数制限なし、広告なし、オフラインで保存できます。下書きは、下書き保存枠追加を別途購入していなければ1件です。</li>
-            <li><strong>下書き保存枠追加のみ購入:</strong> 下書きは10件になります。PDF保存は無料利用と同じ経路で、月2回、通信と広告視聴が必要です。</li>
-            <li><strong>プレミアムと下書き保存枠追加の両方を購入:</strong> PDFはプレミアム経路で保存し、下書きは10件まで利用できます。</li>
-          </ul>
-          <p>月額プレミアムと年額プレミアムの機能は同じです。異なるのは請求期間です。下書き保存枠追加は、プレミアムとは別の買い切り商品です。</p>
+      <section class="usage-branch" aria-labelledby="usage-branch-title">
+        <p class="section-number">Select a guide</p>
+        <h2 id="usage-branch-title">利用状態を選択</h2>
+        <p>現在の利用状態に合う案内を選んでください。共通のラベル作成手順は、選択した案内の後に掲載しています。</p>
+        <div class="usage-tabs" role="tablist" aria-label="利用状態">
+          <button id="free-tab" class="usage-tab" type="button" role="tab" aria-selected="true" aria-controls="free-guide" data-plan="free">無料版</button>
+          <button id="premium-tab" class="usage-tab" type="button" role="tab" aria-selected="false" aria-controls="premium-guide" data-plan="premium" tabindex="-1">有料版</button>
         </div>
       </section>
 
+      <div id="free-guide" class="usage-panel" role="tabpanel" aria-labelledby="free-tab" data-plan-panel="free">
+        <section class="policy-section">
+          <p class="section-number">Free 01</p>
+          <div>
+            <h2>無料版で利用できる内容</h2>
+            <ul>
+              <li>PDFは暦月ごとに2回まで無料保存できます。</li>
+              <li>PDF保存時にインターネット通信と広告視聴が必要です。</li>
+              <li>下書きは1件です。下書き保存枠追加を購入すると10件になります。</li>
+            </ul>
+            <p>下書き保存枠追加は買い切り商品です。これだけを購入した場合もPDF保存は無料版の経路となり、暦月ごとに2回の無料枠、通信、広告視聴が必要です。</p>
+          </div>
+        </section>
+
+        <section class="policy-section">
+          <p class="section-number">Free 02</p>
+          <div>
+            <h2>無料版でPDFを保存する</h2>
+            <ol>
+              <li>プレビュー右上の「PDF保存」を押します。</li>
+              <li>文字切れや学名表記などの警告が表示された場合は、内容を確認して修正するか、「このまま保存」を選びます。</li>
+              <li>アプリが通信し、当月の無料保存枠と利用可能状態を確認します。</li>
+              <li>確認画面で残り回数を確認し、「広告を表示して保存へ進む」を押します。</li>
+              <li>広告を最後まで視聴します。広告報酬が確認されると無料保存枠を1回使用し、PDF保存へ進みます。</li>
+              <li>「PDFを保存しました」と表示されたら完了です。</li>
+            </ol>
+            <p>広告を途中で閉じた場合、広告を読み込めない場合、無料枠を使い切った場合は保存できません。初回などには、広告に関する同意画面が先に表示される場合があります。</p>
+            <p>無料枠の予約後にPDF生成または履歴保存が失敗した場合、アプリは無料枠の復元を試みます。復元結果は画面の案内で確認してください。</p>
+          </div>
+        </section>
+
+        <section class="policy-section">
+          <p class="section-number">Free 03</p>
+          <div>
+            <h2>下書きと有料機能への変更</h2>
+            <p>最初のラベルを追加すると下書きが作成され、その後の変更は自動保存されます。下書きが1件ある状態で「新規作成」を選んで続行すると、既存の下書きが削除され、新しい下書きへ置き換わります。</p>
+            <p>プレミアムまたは下書き保存枠追加を購入する場合は、ホーム画面右上の歯車から「購入と復元」を開き、必要な商品を選択します。</p>
+          </div>
+        </section>
+      </div>
+
+      <div id="premium-guide" class="usage-panel" role="tabpanel" aria-labelledby="premium-tab" data-plan-panel="premium">
+        <section class="policy-section">
+          <p class="section-number">Premium 01</p>
+          <div>
+            <h2>有料版で利用できる内容</h2>
+            <ul>
+              <li>PDFを回数制限なし、広告なしで保存できます。</li>
+              <li>購入状態を確認済みであれば、PDFをオフラインでも保存できます。</li>
+              <li>下書きは通常1件です。下書き保存枠追加を別途購入すると10件になります。</li>
+            </ul>
+            <p>月額プレミアムと年額プレミアムの機能は同じで、異なるのは請求期間です。下書き保存枠追加は、プレミアムとは別の買い切り商品です。</p>
+          </div>
+        </section>
+
+        <section class="policy-section">
+          <p class="section-number">Premium 02</p>
+          <div>
+            <h2>有料版でPDFを保存する</h2>
+            <ol>
+              <li>月額または年額プレミアムが「加入中」であることをホーム画面または設定画面で確認します。</li>
+              <li>プレビュー右上の「PDF保存」を押します。</li>
+              <li>保存前の警告があれば確認します。</li>
+              <li>広告表示と無料保存枠の確認を行わず、PDFが端末へ直接保存されます。</li>
+            </ol>
+            <p>購入状態の取得、購入、復元など、StoreKitを利用する操作には通信が必要になる場合があります。</p>
+          </div>
+        </section>
+
+        <section class="policy-section">
+          <p class="section-number">Premium 03</p>
+          <div>
+            <h2>下書き、更新、購入の復元</h2>
+            <p>下書き保存枠追加が未購入の場合は1件、購入済みの場合は10件です。上限に達した状態で「新規作成」を選んで続行すると、最も古い下書きが削除され、新しい下書きへ置き換わります。</p>
+            <p>機種変更や再インストール後は、同じApple Accountで「購入を復元」を選択してください。プレミアムの有効期間が終了するとPDF保存は無料版の経路へ戻ります。買い切りの下書き保存枠追加は、購入情報が有効である限り10件のままです。</p>
+          </div>
+        </section>
+      </div>
+
       <section class="policy-section">
-        <p class="section-number">Guide 02</p>
+        <p class="section-number">Common 01</p>
         <div>
           <h2>共通のラベル作成手順</h2>
+          <p>標本ラベルメーカーは、入力した標本情報からA4サイズのPDFを作成します。</p>
           <ol>
-            <li>ホーム画面で用紙が「A4」であることを確認し、「新規作成」を選びます。</li>
-            <li>プレビュー画面右下の「＋」を押します。</li>
-            <li>データラベル、同定ラベル、コレクションラベル、無地ラベルから種類を選びます。</li>
+            <li>ホーム画面で「新規作成」を選び、プレビューを開きます。</li>
+            <li>プレビュー右下の追加ボタンを押します。</li>
+            <li>次のラベルから、追加する種類を選びます。</li>
             <li>必要事項、ラベル寸法、文字サイズ、作成枚数を入力し、「プレビューに追加」を押します。</li>
             <li>必要なラベルを同じ操作で追加し、A4プレビューで配置を確認します。</li>
           </ol>
+          <ul>
+            <li>データラベル</li>
+            <li>同定ラベル</li>
+            <li>コレクションラベル</li>
+            <li>無地ラベル</li>
+          </ul>
+          <p>すべての項目を入力する必要はありません。空欄の項目は、ラベルへ出力されません。</p>
           <p>1つのPDFファイルにはA4縦の1ページだけを作成します。指定枚数が1ページに収まらない場合は、収まる枚数だけが追加され、アプリが調整結果を表示します。</p>
         </div>
       </section>
 
       <section class="policy-section">
-        <p class="section-number">Guide 03</p>
+        <p class="section-number">Common 02</p>
         <div>
           <h2>追加後の編集と設定</h2>
           <p>プレビュー上のラベルをタップすると、次の操作を選べます。</p>
@@ -63,70 +147,41 @@
             <li>選択した1セルだけを削除する</li>
           </ul>
           <p>プレビュー上部の「設定」では、すべてのセルへ適用する外枠の太さを変更できます。ラベルの追加、編集、削除、コピー、設定変更は下書きへ自動保存されます。</p>
-          <p>データラベルの「改行設定」では、採集日、採集者、緯度・経度、標高、採集方法、備考について、各項目の前で改行するか個別に切り替えられます。国と産地・採集地は必ず改行されます。改行設定はラベルごとに保存され、下書きとPDF履歴から復元した場合も引き継がれます。</p>
-          <p>採集日は外国式と日本式から選択できます。外国式は14.JUN.2026、日本式は2026.JUN.14のように、同じ月表記と区切りで順序だけを反転します。期間、月まで、旬にも同じ順序が適用され、旬は日本式では初旬、中旬、下旬と表記します。英語の月表記はJANからDECまでの3文字です。座標表記はlat./lon.、方位記号（°N/S/E/W）、日本語（北緯・南緯・東経・西経）から選択できます。方位は入力値の符号から変換され、緯度は＋が北、−が南、経度は＋が東、−が西です。</p>
-        </div>
-      </section>
-
-      <section class="policy-section">
-        <p class="section-number">Guide 04</p>
-        <div>
-          <h2>分岐A: 無料でPDFを保存する</h2>
-          <ol>
-            <li>プレビュー右上の「PDF保存」を押します。</li>
-            <li>文字切れや学名表記などの警告が表示された場合は、内容を確認して修正するか、「このまま保存」を選びます。</li>
-            <li>アプリが通信し、当月の無料保存枠と利用可能状態を確認します。</li>
-            <li>確認画面で残り回数を確認し、「広告を表示して保存へ進む」を押します。</li>
-            <li>広告を最後まで視聴します。広告報酬が確認されると無料保存枠を1回使用し、PDF保存へ進みます。</li>
-            <li>「PDFを保存しました」と表示されたら完了です。</li>
-          </ol>
-          <p>無料保存にはインターネット接続、無料保存APIの確認、広告の読み込みと視聴完了が必要です。広告を途中で閉じた場合、広告を読み込めない場合、無料枠を使い切った場合は保存できません。初回などには、広告に関する同意画面が先に表示される場合があります。</p>
-          <p>無料枠の予約後にPDF生成または履歴保存が失敗した場合、アプリは無料枠の復元を試みます。復元結果は画面の案内で確認してください。</p>
-        </div>
-      </section>
-
-      <section class="policy-section">
-        <p class="section-number">Guide 05</p>
-        <div>
-          <h2>分岐B: プレミアムでPDFを保存する</h2>
-          <ol>
-            <li>月額または年額プレミアムが「加入中」であることをホーム画面または設定画面で確認します。</li>
-            <li>プレビュー右上の「PDF保存」を押します。</li>
-            <li>保存前の警告があれば確認します。</li>
-            <li>広告表示と無料保存枠の確認を行わず、PDFが端末へ直接保存されます。</li>
-          </ol>
-          <p>プレミアムではPDF保存回数の制限がなく、オフラインでも保存できます。ただし、購入状態の取得、購入、復元などStoreKitを利用する操作には通信が必要になる場合があります。</p>
-        </div>
-      </section>
-
-      <section class="policy-section">
-        <p class="section-number">Guide 06</p>
-        <div>
-          <h2>下書きの分岐と上書き</h2>
+          <p>データラベルでは、次の6項目について、項目の前で改行するか個別に設定できます。</p>
           <ul>
-            <li><strong>下書き保存枠追加が未購入:</strong> 下書きは1件です。</li>
-            <li><strong>下書き保存枠追加を購入済み:</strong> 下書きは10件です。プレミアム加入の有無は、この件数へ影響しません。</li>
+            <li>採集日</li>
+            <li>採集者</li>
+            <li>緯度・経度</li>
+            <li>標高</li>
+            <li>採集方法</li>
+            <li>備考</li>
           </ul>
-          <p>最初のラベルを追加すると下書きが作成され、その後の変更は自動保存されます。上限に達した状態で「新規作成」を選ぶと警告が表示され、続行した場合は最も古い下書きが削除されて新しい下書きへ置き換わります。</p>
-          <p>「下書きから再開」では保存中の編集内容を開けます。下書きを削除しても、すでに保存したPDFファイルは削除されません。</p>
+          <p>国と産地・採集地は必ず改行します。OFFにした項目は、直前の入力済み項目へ半角スペースで続けて出力します。</p>
+          <p>改行設定はラベルごとに保存し、下書きとPDF履歴から復元した場合も引き継ぎます。</p>
+          <p>採集日は、外国式または日本式を選べます。</p>
+          <ul>
+            <li><strong>外国式:</strong> 14.JUN.2026</li>
+            <li><strong>日本式:</strong> 2026.JUN.14</li>
+          </ul>
+          <p>月表記と区切りは共通で、年月日の順序だけが変わります。この順序は、期間、月まで、旬にも適用します。</p>
+          <ul>
+            <li><strong>日本式の旬:</strong> 初旬、中旬、下旬</li>
+            <li><strong>外国式の旬:</strong> early, mid, late</li>
+          </ul>
+          <p>英語の月名は、JANからDECまでの3文字です。</p>
+          <p>座標は、次の3方式から選べます。</p>
+          <ul>
+            <li>lat./lon.</li>
+            <li>方位記号（°N/S/E/W）</li>
+            <li>日本語（北緯・南緯・東経・西経）</li>
+          </ul>
+          <p>方位は入力値の符号から変換します。緯度は＋が北、−が南です。経度は＋が東、−が西です。</p>
+          <p>日付と座標の表記設定は、下書きとPDF履歴から復元した場合も引き継ぎます。</p>
         </div>
       </section>
 
       <section class="policy-section">
-        <p class="section-number">Guide 07</p>
-        <div>
-          <h2>購入と復元</h2>
-          <ol>
-            <li>ホーム画面右上の歯車を開きます。</li>
-            <li>「購入と復元」を選びます。</li>
-            <li>月額プレミアム、年額プレミアム、下書き保存枠追加から必要な商品を選び、App Storeの購入画面で確定します。</li>
-          </ol>
-          <p>機種変更や再インストール後は、同じApple Accountで「購入を復元」を選択してください。プレミアムの有効期間が終了するとPDF保存は無料経路へ戻ります。買い切りの下書き保存枠追加は、購入情報が有効である限り10件のままです。</p>
-        </div>
-      </section>
-
-      <section class="policy-section">
-        <p class="section-number">Guide 08</p>
+        <p class="section-number">Common 03</p>
         <div>
           <h2>保存後の確認、共有、再編集</h2>
           <ul>
@@ -139,11 +194,11 @@
       </section>
 
       <section class="policy-section">
-        <p class="section-number">Guide 09</p>
+        <p class="section-number">Common 04</p>
         <div>
           <h2>印刷前の確認</h2>
           <p>印刷時はA4用紙を選び、倍率を「実際のサイズ」または「100%」に設定してください。「用紙に合わせる」などの自動拡大縮小が有効だと、指定したラベル寸法と異なる場合があります。</p>
-          <p>学名、採集地、採集者、同定情報、文字切れを確認し、標本へ使用する前に必ず試し印刷を行ってください。PDFの解像度と内部変換については、<a href="pdf-technology.html">PDFと解像度</a>を参照してください。</p>
+          <p>学名、採集地、採集者、同定情報、文字切れを確認し、標本へ使用する前に必ず試し印刷を行ってください。PDFの解像度と内部変換については、<a href="pdf-technology.html?topic=resolution">PDFと解像度</a>を参照してください。</p>
         </div>
       </section>
     </main>
